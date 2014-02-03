@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+  html {
+    font-family: "Lucida Sans", sans-serif;
+    color: #333;
+    line-height: 1.5em;
+  }
+  body {
+    background: #eee;
+  }
+  .instrument,
+  .instrument:visited {
+    color: rgb(20,20,20);
+  }
+  .timer {
+    font: 20px "Consolas", monospace;
+    line-height: 0.8em;
+  }
+  #timerSounds {
+    font: 20px "Consolas", monospace;
+    line-height: 0.8em;
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+  }
+  #timerBar {
+    position: relative;
+  }
+  #timerBar:before {
+    position:absolute; 
+    opacity:0.5;
+    content: "|___|___|___|___";
+    height: 0.8em;
+    overflow: hidden;
+  }
+  .wrapper {
+    width: 800px;
+    margin: 0 auto;
+  }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+<table><tr><td>
+  <h3>Pattern</h3>
+  <div class="timer">
+    <label for="loopCheckbox">Playing</label><input id="loopCheckbox" onchange="loopCheckbox(this)" type="checkbox"> <span style='color:#c33'><span style="margin-right: -0.39em;">&lt;</span>—— click to play</span><br><br>
+      <!-- <span style="position:absolute; opacity:0.5;">|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span> -->
+      <span>Presets</span>
+      <select name="presets" id="presets"
+      onchange="
+      document.getElementById('timerSounds').innerHTML = this.value.replace(/\//g,'\n');
+      timerSoundsAr = this.value.split('/');
+      ">
+        <option value="v---s--svsv-s---/h-h-h-h-h-h-h-h-/u">acoustic groove</option>
+        <option value="b--bc-b---b-c---">electronic</option>
+        <option value="----------------/----------------/----------------">clear</option>
+      </select><br><br>
+      <span id="timerBar">----------------</span><br>
+      <textarea cols="15" rows="3" id="timerSounds" 
+      style="min-width:200px"
+      onchange="timerSoundsAr = this.value.split('\n')">v---s--svsv-s---
+h-h-h-h-h-h-h-h-
+u</textarea><br>
+  </div>
+  <div style="color:#999; font-style: italic;">За каждый сэмпл отвечает соответствующая буква.</div>
+</td><td style='padding-left: 80px;'>
+  <h3>Samples</h3>
+  <ul>
+    <li><a href="#" id="click" class="instrument" onmousedown="play('click');">click <b>C</b></a></li>
+    <li><a href="#" id="bass" class="instrument" onmousedown="play('bass')">bass <b>B</b></a></li>
+    <li><a href="#" id="hat" class="instrument" onmousedown="play('hat')">hat <b>H</b></a></li>
+    <li><a href="#" id="crash" class="instrument" onmousedown="play('crash')">crash <b>U</b></a></li>
+    <li><a href="#" id="snare" class="instrument" onmousedown="play('snare')">snare <b>S</b></a></li>
+    <li><a href="#" id="kick" class="instrument" onmousedown="play('kick')">kick <b>V</b></a></li>
+  </ul>
+</td></tr></table>
+</div>
+</body>
+<script src="js/main.js"></script>
+<script src="js/social.js"></script>
+</html>
